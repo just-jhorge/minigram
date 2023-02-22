@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.center-items {
+	@apply flex items-center justify-center;
+}
+
+.react-icon {
+	@apply text-2xl;
+}
+
+.form-input {
+	@apply w-full border border-gray-300 bg-gray-100 rounded-sm px-2 py-2 text-sm;
+}
+
+.form-btn {
+	@apply bg-blue-500 text-white text-sm py-1.5 rounded-sm;
+}
