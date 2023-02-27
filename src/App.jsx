@@ -5,6 +5,7 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Layout from "./components/Layout/Layout";
 import UserProfile from "./pages/UserProfile";
+import UpdateProfile from "./pages/UpdateProfile";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Route path="home" element={<Home />} />
 				</Route>
 				<Route path="/:id" element={<UserProfile />} />
+				<Route path="/update" element={<UpdateProfile />} />
 			</Routes>
 		</>
 	);

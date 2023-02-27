@@ -1,21 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Formik, Field, Form } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import GooglePlay from "../../assets/google-play.png";
 import Microsoft from "../../assets/microsoft.png";
 import { Input } from "../FormInput/FormInput";
 import { footerContent1, footerContent2 } from "../../data/data";
 import { useAuth } from "../../context/AuthContext";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
-// import { AlertContext } from "../../context/AlertContext";
 
 const Signup = () => {
-	const [loading, setLoading] = useState(false);
-	const { signup } = useAuth();
-	const navigate = useNavigate();
-	// const alertContext = useContext(AlertContext);
+	const { signup, loading } = useAuth();
 
 	const initialValues = {
 		username: "",
@@ -46,34 +40,6 @@ const Signup = () => {
 			.required("Required!"),
 	});
 
-	const handleSubmit = async (values, { resetForm }) => {
-		setTimeout(() => {
-			resetForm();
-		}, 2000);
-
-		try {
-			setLoading(true);
-			const response = await signup(values.email, values.password);
-			const user = response.user;
-			await addDoc(collection(db, "users"), {
-				uid: user.uid,
-				username: values.username,
-				firstName: values.firstName,
-				lastName: values.lastName,
-				email: values.email,
-			});
-			navigate("/app/home");
-			// alertContext.addAlert({
-			// 	type: "success",
-			// 	label: "Successfully registered",
-			// });
-		} catch (error) {
-			console.log(error.message);
-		}
-
-		setLoading(false);
-	};
-
 	return (
 		<main className="container flex flex-col items-center justify-evenly h-screen w-full">
 			<div className="w-3/4 flex flex-col items-center justify-center">
@@ -81,7 +47,7 @@ const Signup = () => {
 				<Formik
 					initialValues={initialValues}
 					validationSchema={validationSchema}
-					onSubmit={handleSubmit}
+					onSubmit={signup}
 				>
 					<Form className="flex flex-col w-full gap-4">
 						<Input type="text" name="username" placeholder="Username" />

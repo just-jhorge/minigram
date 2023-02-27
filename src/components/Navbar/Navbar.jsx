@@ -13,9 +13,7 @@ const Navbar = () => {
 					</div>
 					<div className="relative">
 						<AiOutlineHeart className="react-icon" />
-						<div className="absolute -top-2 -right-2 text-xs w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center">
-							2
-						</div>
+						<div className="absolute top-0 right-0 text-xs w-2 h-2 rounded-full bg-red-500 text-white flex items-center justify-center" />
 					</div>
 				</div>
 			</div>

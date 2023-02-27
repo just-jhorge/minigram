@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { Field, Formik, Form } from "formik";
 import * as Yup from "yup";
-import { AiFillFacebook } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { AiFillFacebook } from "react-icons/ai";
+import { Formik, Form } from "formik";
+import { useAuth } from "../../context/AuthContext";
+import { Input } from "../FormInput/FormInput";
 import GooglePlay from "../../assets/google-play.png";
 import Microsoft from "../../assets/microsoft.png";
-import { Input } from "../FormInput/FormInput";
-import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
-	const [loading, setLoading] = useState(false);
-	const [disabled, setDisabled] = useState(false);
-	const { login } = useAuth();
-	const navigate = useNavigate();
+	const { login, loading } = useAuth();
 
 	const initialValues = {
 		email: "",
@@ -24,20 +21,6 @@ const Login = () => {
 		password: Yup.string().required("Required!"),
 	});
 
-	const handleSubmit = async (values, { resetForm }) => {
-		try {
-			setTimeout(() => {
-				resetForm();
-			}, 5000);
-			setLoading(true);
-			setDisabled(true);
-
-			await login(values.email, values.password);
-			navigate("/app/home");
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
 	return (
 		<main className="container flex flex-col items-center justify-evenly h-screen w-full">
 			<div className="w-3/4 flex flex-col items-center justify-center">
@@ -45,12 +28,12 @@ const Login = () => {
 				<Formik
 					initialValues={initialValues}
 					validationSchema={validationSchema}
-					onSubmit={handleSubmit}
+					onSubmit={login}
 				>
 					<Form className="flex flex-col w-full gap-4">
 						<Input type="email" name="email" placeholder="Email" />
 						<Input type="password" name="password" placeholder="Password" />
-						<button type="submit" className="form-btn" disabled={disabled}>
+						<button type="submit" className="form-btn">
 							{loading ? "Loading..." : "Log in"}
 						</button>
 					</Form>

@@ -6,10 +6,6 @@ import Settings from "../Settings/Settings";
 const Navbar2 = ({ user }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const indexOfAt = () => {
-		return user.email.indexOf("@");
-	};
-
 	const toggleSettings = () => {
 		setIsOpen(!isOpen);
 	};
@@ -20,7 +16,7 @@ const Navbar2 = ({ user }) => {
 				<div onClick={toggleSettings}>
 					<BsGearWide className="react-icon" />
 				</div>
-				<div>{user.email.slice(0, indexOfAt())}</div>
+				<div>{user.username}</div>
 				<div>
 					<MdOutlinePersonAdd className="react-icon" />
 				</div>

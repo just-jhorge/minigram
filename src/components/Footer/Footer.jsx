@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Footer = () => {
-	const { currentUser } = useAuth();
+	const { userData } = useAuth();
 
 	return (
 		<footer className="fixed bottom-0 bg-white border-t border-gray-300 w-full h-16 flex items-center justify-center">
@@ -22,11 +22,9 @@ const Footer = () => {
 				</div>
 				<div className="relative">
 					<AiOutlineMessage className="react-icon" />
-					<div className="absolute -top-2 -right-2 text-xs w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center">
-						2
-					</div>
+					<div className="absolute top-0 right-0 text-xs w-2 h-2 rounded-full bg-red-500 text-white flex items-center justify-center" />
 				</div>
-				<Link to={`/${currentUser.uid}`}>
+				<Link to={`/${userData.username}`}>
 					<BiUserCircle className="react-icon" />
 				</Link>
 			</div>
